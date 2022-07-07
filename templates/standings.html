@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Standings</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <img src="https://crests.football-data.org/66.png" alt="logo" class="logo">
+        <h3 id="rd">Red Devil Fixtures</h3>
+      </div><!--
+      --><div class="header-right">
+        <h4 id="pagelink"><a href="{{ url_for('today') }}">Schedule</a></h4>
+        <h4 id="pagelink-1"><a href="{{ url_for('standings') }}">Standings</a></h4>
+      </div>
+    </div>
+    <div class="pagetitle">
+      <h1 id="page-title">Standings</h1>
+        <form id="chooseComp" method="post">
+          <label for="competition">Showing standings for:</label>
+          <select class="" name="competition" oninput="chooseComp.submit()">
+            <option value="0">All</option>
+            {% for comp in all_comps %}
+                {% if comp.comp_id == selected_comp %}
+                  <option value="{{ comp.comp_id }}" selected>{{ comp.name }}</option>
+                {% else %}
+                  <option value="{{ comp.comp_id }}">{{ comp.name }}</option>
+                {% endif %}
+            {% endfor %}
+          </select>
+        </form>
+    </div>
+    <div class="matchlist">
+    {% if selected_comp >= 1 %}
+        {% for comp in all_comps %}
+            {% if comp.comp_id == selected_comp %}
+                {% set standings = all_standings[loop.index0] %}
+                <h2>{{ comp.name }}</h2>
+                <table width="100%" style="margin-bottom: 1rem;" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th><span>Position</span></th>
+                      <th><span>Team</span></th>
+                      <th></th>
+                      <th><span>Matches Played</span></th>
+                      <th><span>Form</span></th>
+                      <th><span>Win</span></th>
+                      <th><span>Draw</span></th>
+                      <th><span>Loss</span></th>
+                      <th><span>Goals For</span></th>
+                      <th><span>Goals Against</span></th>
+                      <th><span>Goal Difference</span></th>
+                      <th><span>Points</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for standing in standings %}
+                    <tr>
+                      <td><span>{{ standing.position }}</span></td>
+                      <td><span><img src="{{ standing.crest }}" alt="teamCrest" class="teamcrest"></span></td>
+                      <td class="teamcellaway"><span>{{ standing.name }}</span></td>
+                      <td><span>{{ standing.games_played }}</span></td>
+                      <td><span>{{ standing.form }}</span></td>
+                      <td><span>{{ standing.win }}</span></td>
+                      <td><span>{{ standing.draw }}</span></td>
+                      <td><span>{{ standing.loss }}</span></td>
+                      <td><span>{{ standing.goals_for }}</span></td>
+                      <td><span>{{ standing.goals_against }}</span></td>
+                      <td><span>{{ standing.goal_difference }}</span></td>
+                      <td><span>{{ standing.points }}</span></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for comp in all_comps %}
+            {% set standings = all_standings[loop.index0] %}
+            <h2>{{ comp.name }}</h2>
+            <table width="100%" style="margin-bottom: 1rem;" cellspacing="0">
+              <thead>
+                <tr>
+                  <th><span>Position</span></th>
+                  <th><span>Team</span></th>
+                  <th></th>
+                  <th><span>Matches Played</span></th>
+                  <th><span>Form</span></th>
+                  <th><span>Win</span></th>
+                  <th><span>Draw</span></th>
+                  <th><span>Loss</span></th>
+                  <th><span>Goals For</span></th>
+                  <th><span>Goals Against</span></th>
+                  <th><span>Goal Difference</span></th>
+                  <th><span>Points</span></th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for standing in standings %}
+                <tr>
+                  <td><span>{{ standing.position }}</span></td>
+                  <td><span><img src="{{ standing.crest }}" alt="teamCrest" class="teamcrest"></span></td>
+                  <td class="teamcellaway"><span>{{ standing.name }}</span></td>
+                  <td><span>{{ standing.games_played }}</span></td>
+                  <td><span>{{ standing.form }}</span></td>
+                  <td><span>{{ standing.win }}</span></td>
+                  <td><span>{{ standing.draw }}</span></td>
+                  <td><span>{{ standing.loss }}</span></td>
+                  <td><span>{{ standing.goals_for }}</span></td>
+                  <td><span>{{ standing.goals_against }}</span></td>
+                  <td><span>{{ standing.goal_difference }}</span></td>
+                  <td><span>{{ standing.points }}</span></td>
+                </tr>
+            {% endfor %}
+              </tbody>
+              </table>
+        {% endfor %}
+    {% endif %}
+    </div>
+    <div class="footer">
+      <p class="graffiti">Liverpool fans r wankrs</p>
+    </div>
+  </body>
+</html>

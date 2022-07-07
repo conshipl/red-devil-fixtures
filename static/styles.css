@@ -1,0 +1,174 @@
+a {
+  color: white;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: gold;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: space-between;
+}
+
+h2 {
+  text-align: left;
+  margin: .3125rem 0;
+}
+
+td {
+  text-align: center;
+  padding: 1px 4px 0px 4px;
+}
+
+th {
+  position: relative;
+  border: 1px solid black;
+  border-right: none;
+  border-left: none;
+}
+
+tr {
+  padding-bottom: 1rem;
+}
+
+/****************CLASS SELECTORS****************/
+.crest {
+  width: 2.9404375rem;
+}
+
+.footer {
+  height: 8.548125rem;
+  background-color: red;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+.graffiti {
+  color: white;
+  margin-top: 4rem;
+}
+
+.header {
+  height: 3.125rem;
+  background-color: red;
+  border-top: 1px solid black;
+  text-align: left;
+  padding: 0;
+}
+
+.header-left {
+  text-align: left;
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.header-right {
+  text-align: right;
+  height: 100%;
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.location {
+  width: 13.41875rem;
+}
+
+.logo {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-left: 2rem;
+  margin-top: 0.8rem;
+}
+
+.match {
+  width: 3.182625rem;
+}
+
+.matchlist {
+  position: relative;
+  width: 95%;
+  margin: 0 auto auto auto;
+  padding-top: 1rem;
+  padding-bottom: 3.125rem;
+}
+
+.pagetitle {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: gold;
+  z-index: 10;
+  padding-top: 1.5625rem;
+  padding-bottom: 1.5625rem;
+  border: 3px solid black;
+}
+
+.teamcellaway {
+  width: 9.6875rem;
+  text-align: right;
+}
+
+.teamcellhome {
+  width: 9.6875rem;
+  text-align: left;
+}
+
+.teamcrest {
+  height: 1.25rem;
+  width: 1.25rem;
+  margin-left: .5rem;
+  margin-right: .5rem;
+}
+
+.time {
+  width: 5.9805rem;
+}
+
+.versus {
+  width: 5rem;
+}
+
+.watch {
+  width: 7.5rem;
+}
+
+/****************ID SELECTORS****************/
+#pagelink {
+  color: white;
+  margin-top: 1.05rem;
+  margin-right: 2rem;
+  display: inline-block;
+}
+
+#pagelink-1 {
+  color: white;
+  margin-top: 1.05rem;
+  margin-right: 8rem;
+  display: inline-block;
+}
+
+#page-title {
+  margin-top: 0;
+}
+
+#rd {
+  color: white;
+  margin-top: 0.9rem;
+  margin-left: 1rem;
+  display: inline-block;
+  vertical-align: top;
+}

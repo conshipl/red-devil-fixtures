@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Schedule</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="icon" href="/static/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="header">
+      <div class="header-left">
+        <img src="https://crests.football-data.org/66.png" alt="logo" class="logo">
+        <h3 id="rd">Red Devil Fixtures</h3>
+      </div><!--
+      --><div class="header-right">
+        <h4 id="pagelink"><a href="{{ url_for('today') }}">Schedule</a></h4>
+        <h4 id="pagelink-1"><a href="{{ url_for('standings') }}">Standings</a></h4>
+      </div>
+    </div>
+    <div class="pagetitle">
+      <h1 id="page-title">Soccer Schedule</h1>
+        <form id="chooseDate" method="post">
+          <label for="input-date">Showing matches for:</label>
+          <input type="date" id="input-date" name ="input-date" value="{{ selected_date }}" oninput="chooseDate.submit()">
+        </form>
+    </div>
+    <div class="matchlist">
+    {% set ns = namespace(flag=false) %}
+    {% for comp in all_comps %}
+        {% set matches = all_matches[loop.index0] %}
+        {% if matches|length > 0 %}
+            {% set ns.flag = true %}
+            <h2>{{ comp.name }}</h2>
+            <table width="100%" style="margin-bottom: 1rem;" cellspacing="0">
+              <thead>
+                <tr>
+                  <th class="match"><span>Match</span></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th class="location"><span>Location</span></th>
+                  <th class="time"><span>Time (UTC)</span></th>
+                  <th class="watch"><span>Watch</span></th>
+                </tr>
+              </thead>
+              <tbody>
+            {% for match in matches %}
+                <tr>
+                  <td class="match"></td>
+                  <td class="teamcellaway"><span>{{ match.away_name }}</span></td>
+                  <td class="crest"><span><img src="{{ match.away_crest }}" alt="awayCrest" class="teamcrest"></span></td>
+                  {% if match.status != 'FINISHED' %}
+                    <td class="versus"><span>v.</span></td>
+                    <td class="crest"><span><img src="{{ match.home_crest }}" alt="homeCrest" class="teamcrest"></span></td>
+                    <td class="teamcellhome"><span>{{ match.home_name }}</span></td>
+                    <td class="location"><span>{{ match.location }}</span></td>
+                    {% if match.status == 'POSTPONED' or match.status == 'CANCELLED' %}
+                      <td class="time"><span>{{ match.status }}</span></td>
+                    {% else %}
+                      <td class="time"><span>{{ match.time }}</span></td>
+                    {% endif %}
+                    <td class="watch"><span>{{ match.watch }}</span></td>
+                  {% else %}
+                    <td class="versus"><span>{{ match.away_score }} - {{  match.home_score }}</span></td>
+                    <td class="crest"><span><img src="{{ match.home_crest }}" alt="homeCrest" class="teamcrest"></span></td>
+                    <td class="teamcellhome"><span>{{ match.home_name }}</span></td>
+                    <td class="location"><span>{{ match.location }}</span></td>
+                    <td class="time"><span>FT</span></td>
+                    <td class="watch"><span>{{ match.watch }}</span></td>
+                  {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        {% endif %}
+    {% endfor %}
+    {% if ns.flag == false %}
+        <h2>No matches for selected date.</h2>
+    {% endif %}
+    </div>
+    <div class="footer">
+      <p class="graffiti">Liverpool fans r wankrs</p>
+    </div>
+  </body>
+</html>
